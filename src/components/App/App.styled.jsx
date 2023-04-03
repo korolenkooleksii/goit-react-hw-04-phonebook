@@ -15,3 +15,8 @@ export const TitleContacts = styled.h2`
   color: ${p => p.theme.colors.greey};
   margin-bottom: 20px;
 `;
+
+export const Info = styled.h2`
+  color: ${p => p.theme.colors.greey};
+  margin-bottom: 20px;
+`;

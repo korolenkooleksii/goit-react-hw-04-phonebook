@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
-import { Container, TitleForm, TitleContacts } from './App.styled';
+import { useState, useEffect } from 'react';
+import { Container, TitleForm, TitleContacts, Info } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';
 import Filter from '../Filter/Filter';
+import { save, load } from '../Utils/Utils';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,10 +15,21 @@ const testContacts = [
   { id: 'id-4', name: 'Angelina Jolie', number: '227-91-26' },
 ];
 
-const App = () => {
-  const [contacts, setContacts] = useState(testContacts);
+const KEY_CONTACTS = 'contacts';
 
+const App = () => {
+  const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    const isContacts = load(KEY_CONTACTS);
+
+    isContacts === [] ? setContacts(isContacts) : setContacts(testContacts);
+  }, []);
+
+  useEffect(() => {
+    save(KEY_CONTACTS, contacts);
+  }, [contacts]);
 
   const updateState = (userName, userNumber) => {
     if (contacts.some(el => el.name === userName)) {
@@ -49,8 +61,15 @@ const App = () => {
     <Container>
       <TitleForm>Phonebook</TitleForm>
       <ContactForm updateState={updateState} />
-      <TitleContacts>Contacts</TitleContacts>
-      <Filter filter={filter} updateFilter={updateFilter} />
+      {contacts.length === 0 ? (
+        <Info>No contacts.</Info>
+      ) : (
+        <>
+          <TitleContacts>Contacts</TitleContacts>
+          <Filter filter={filter} updateFilter={updateFilter} />
+        </>
+      )}
+
       {filter === '' ? (
         <ContactsList contacts={contacts} deleteContact={deleteContact} />
       ) : (

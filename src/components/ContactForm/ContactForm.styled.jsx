@@ -58,6 +58,8 @@ export const ButtonForm = styled.button`
 
   :disabled {
     background-color: ${p => p.theme.colors.noActiv};
+    box-shadow: none;
+    color: ${p => p.theme.colors.white};
   }
 
   :enabled:hover {
