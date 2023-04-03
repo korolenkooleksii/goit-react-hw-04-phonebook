@@ -56,7 +56,11 @@ export const ButtonForm = styled.button`
   transition: box-shadow 250ms ease-in-out, color 250ms ease-in-out,
     border 250ms ease-in-out;
 
-  :hover {
+  :disabled {
+    background-color: ${p => p.theme.colors.noActiv};
+  }
+
+  :enabled:hover {
     border: 1px solid ${p => p.theme.colors.white};
     box-shadow: ${p => p.theme.colors.shadowAccent};
     color: ${p => p.theme.colors.white};

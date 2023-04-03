@@ -11,6 +11,7 @@ const theme = {
     greey: '#313131',
     white: 'white',
     accent: '#739ceda4',
+    noActiv: '#b3c4e6a3',
     shadow: '1px 2px 2px rgb(0 0 0 / 0.5)',
     shadowAccent: '2px 5px 2px rgb(0 0 0 / 0.5)',
   },

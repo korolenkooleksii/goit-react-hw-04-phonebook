@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   ItemContacts,
   ListContacts,
@@ -7,10 +6,10 @@ import {
 import { TbPoint } from 'react-icons/tb';
 import PropTypes from 'prop-types';
 
-const ContactsList = ({ state, deleteContact }) => {
+const ContactsList = ({ contacts, deleteContact }) => {
   return (
     <ListContacts>
-      {state.map(({ name, number, id }) => (
+      {contacts.map(({ name, number, id }) => (
         <ItemContacts key={id}>
           <TbPoint />
           {name}: {number}
