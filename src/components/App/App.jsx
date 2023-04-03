@@ -7,13 +7,15 @@ import Filter from '../Filter/Filter';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const testContacts = [
+  { id: 'id-1', name: 'Adam Sandler', number: '459-12-56' },
+  { id: 'id-2', name: 'Jennifer Aniston', number: '443-89-12' },
+  { id: 'id-3', name: 'Brad Pitt', number: '645-17-79' },
+  { id: 'id-4', name: 'Angelina Jolie', number: '227-91-26' },
+];
+
 const App = () => {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Adam Sandler', number: '459-12-56' },
-    { id: 'id-2', name: 'Jennifer Aniston', number: '443-89-12' },
-    { id: 'id-3', name: 'Brad Pitt', number: '645-17-79' },
-    { id: 'id-4', name: 'Angelina Jolie', number: '227-91-26' },
-  ]);
+  const [contacts, setContacts] = useState(testContacts);
 
   const [filter, setFilter] = useState('');
 
@@ -21,9 +23,9 @@ const App = () => {
     if (contacts.some(el => el.name === userName)) {
       toast.warn(`${userName} is already in contacts.`, { theme: 'colored' });
     } else {
-      setContacts([
+      setContacts(prevState => [
         { name: userName, number: userNumber, id: nanoid() },
-        ...contacts,
+        ...prevState,
       ]);
     }
   };
