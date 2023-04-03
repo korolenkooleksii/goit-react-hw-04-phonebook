@@ -4,6 +4,8 @@ import { Container, TitleForm, TitleContacts } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';
 import Filter from '../Filter/Filter';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -16,12 +18,8 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   const updateState = (userName, userNumber) => {
-    // setContacts([{ name: userName, number: userNumber, id: nanoid() },
-    // ...contacts,
-    // ])
-
     if (contacts.some(el => el.name === userName)) {
-      alert(`${userName} is already in contacts.`);
+      toast.warn(`${userName} is already in contacts.`, { theme: 'colored' });
     } else {
       setContacts([
         { name: userName, number: userNumber, id: nanoid() },
@@ -56,6 +54,7 @@ const App = () => {
       ) : (
         <ContactsList contacts={filterByName()} deleteContact={deleteContact} />
       )}
+      <ToastContainer />
     </Container>
   );
 };
