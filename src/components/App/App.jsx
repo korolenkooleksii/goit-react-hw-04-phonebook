@@ -1,35 +1,19 @@
 import { nanoid } from 'nanoid';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import useLocalStorage from 'components/Hooks/useLocalStorage';
 import { Container, TitleForm, TitleContacts, Info } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';
 import Filter from '../Filter/Filter';
-import { save, load } from '../Utils/Utils';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const testContacts = [
-  { id: 'id-1', name: 'Adam Sandler', number: '459-12-56' },
-  { id: 'id-2', name: 'Jennifer Aniston', number: '443-89-12' },
-  { id: 'id-3', name: 'Brad Pitt', number: '645-17-79' },
-  { id: 'id-4', name: 'Angelina Jolie', number: '227-91-26' },
-];
 
 const KEY_CONTACTS = 'contacts';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useLocalStorage(KEY_CONTACTS, []);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const isContacts = load(KEY_CONTACTS);
-
-    isContacts === [] ? setContacts(isContacts) : setContacts(testContacts);
-  }, []);
-
-  useEffect(() => {
-    save(KEY_CONTACTS, contacts);
-  }, [contacts]);
 
   const updateState = (userName, userNumber) => {
     if (contacts.some(el => el.name === userName)) {
