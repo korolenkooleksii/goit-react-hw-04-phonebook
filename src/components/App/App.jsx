@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import useLocalStorage from 'components/Hooks/useLocalStorage';
+import useLocalStorage from 'components/hooks/useLocalStorage';
 import { Container, TitleForm, TitleContacts, Info } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';

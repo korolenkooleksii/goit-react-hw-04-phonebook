@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { save, load } from '../Utils/Utils';
 
 const useLocalStorage = (key, defaultValue) => {
-  const [contacts, setContacts] = useState(() => load(key) ?? defaultValue);
+  const [state, setState] = useState(() => load(key) ?? defaultValue);
 
   useEffect(() => {
-    save(key, contacts);
-  }, [contacts, key]);
+    save(key, state);
+  }, [state, key]);
 
-  return [contacts, setContacts];
+  return [state, setState];
 };
 
 export default useLocalStorage;
