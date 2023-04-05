@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import useLocalStorage from 'components/hooks/useLocalStorage';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { Container, TitleForm, TitleContacts, Info } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';
@@ -13,7 +13,6 @@ const KEY_CONTACTS = 'contacts';
 const App = () => {
   const [contacts, setContacts] = useLocalStorage(KEY_CONTACTS, []);
   const [filter, setFilter] = useState('');
-
 
   const updateState = (userName, userNumber) => {
     if (contacts.some(el => el.name === userName)) {
