@@ -30,10 +30,14 @@ const App = () => {
   };
 
   const filterByName = () => {
-    const arr = contacts.filter(el =>
-      el.name.toLowerCase().includes(filter.trim())
-    );
-    return arr;
+    if (filter) {
+      const arr = contacts.filter(el =>
+        el.name.toLowerCase().includes(filter.trim())
+      );
+      return arr;
+    } else {
+      return contacts;
+    }
   };
 
   const deleteContact = id => {
@@ -52,12 +56,7 @@ const App = () => {
           <Filter filter={filter} updateFilter={updateFilter} />
         </>
       )}
-
-      {filter === '' ? (
-        <ContactsList contacts={contacts} deleteContact={deleteContact} />
-      ) : (
-        <ContactsList contacts={filterByName()} deleteContact={deleteContact} />
-      )}
+      <ContactsList contacts={filterByName()} deleteContact={deleteContact} />
       <ToastContainer />
     </Container>
   );
