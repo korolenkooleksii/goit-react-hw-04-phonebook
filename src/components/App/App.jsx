@@ -31,10 +31,10 @@ const App = () => {
 
   const filterByName = () => {
     if (filter) {
-      const arr = contacts.filter(el =>
+      const visibleFriands = contacts.filter(el =>
         el.name.toLowerCase().includes(filter.trim())
       );
-      return arr;
+      return visibleFriands;
     } else {
       return contacts;
     }
@@ -48,7 +48,7 @@ const App = () => {
     <Container>
       <TitleForm>Phonebook</TitleForm>
       <ContactForm updateState={updateState} />
-      {contacts.length === 0 ? (
+      {(!contacts.length) ? (
         <Info>No contacts.</Info>
       ) : (
         <>
